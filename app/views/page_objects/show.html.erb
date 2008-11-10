@@ -1,0 +1,10 @@
+<% stylesheets 'classic-recent-listings' %>
+<% # javascripts 'prototype', 'effects', 'dragdrop', 'assets' %>
+
+<h1><%=h @page_object.header %></h1>
+
+<div class="listings">
+<% @page_object.full_listings.each do |listing| %>
+  <%= render :partial => 'page_objects/listing', :locals => { :listing => listing } %>
+<% end %>
+</div>

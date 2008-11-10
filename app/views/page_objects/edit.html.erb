@@ -1,0 +1,37 @@
+<% stylesheets 'classic-recent-listings', 'classic-recent-listings-edit' -%>
+<% javascripts 'classic-recent-listings-edit' %>
+
+<% fields_for_page_object do |f| %>
+
+<h1>
+  <%= f.label :header %>
+  <%= f.text_field :header %>
+</h1>
+
+<div class="datapath">
+  <%= f.label :data_path, 'Search for (data path):' %>
+  <span class="readonly">
+    <%=h f.object.data_path %>
+    <a class='button'>change</a>
+  </span>
+  <span class="editable hidden">
+    <%= f.text_field :data_path %>
+  </span>
+</div>
+
+<div class="functions">
+  <%= link_to_new_page "New #{f.object.data_path.blank? ? 'Page' : f.object.data_path.singularize.titleize}...", 
+        { :representing => f.object.data_path.blank? ? nil : f.object.data_path.singularize }, { :class => 'button new-page' } %>
+</div>
+
+<div class="listings">
+<% @page_object.full_listings.each do |listing| %>
+  <%= render :partial => 'page_objects/listing', :locals => { :listing => listing } %>
+<% end %>
+</div>
+
+<div class="functions">
+  <%= link_to_new_page "New #{f.object.data_path.blank? ? 'Page' : f.object.data_path.singularize.titleize}...", 
+        { :representing => f.object.data_path.blank? ? nil : f.object.data_path.singularize }, { :class => 'button new-page' } %>
+</div>
+<% end %>
